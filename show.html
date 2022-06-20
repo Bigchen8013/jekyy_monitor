@@ -7,9 +7,13 @@
     </head>
 
     <body>
-        {% for i in site.data.ip_list%}
-            {{i.ip}}, {{i.status}} <br />
-        {% endfor  %}
-        
+        <table border="1">
+            {% for i in site.data.ip_list%}
+            <tr>
+                <td>{{i.ip}}</td>
+                <td>{{i.status}}</td>
+            </tr>
+            {% endfor  %}
+        </table>
     </body>
 </html>

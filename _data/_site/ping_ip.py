@@ -4,6 +4,7 @@ import re
 
 ip_list = []
 
+# 读取ip地址
 with open("./ip_list.yml") as rf:
     lines = rf.readlines()
 
@@ -12,19 +13,27 @@ with open("./ip_list.yml") as rf:
             continue
         if line.startswith("-"):
             line = line.split(":")
-            print("此时的line",line)
+            print("此时的line：",line)
             ip = line[1].strip()     # 获取文件中的ip地址
+            print("获取到的IP：",ip)
             ip_list.append(ip)
 
     buffer = ""
+    # 将结果重新写入到yml文件夹中
     for ip in ip_list:
         result = ""
+        # 使用ping命令进行监控，查看是否能够返回包
         a = os.system(f"ping -c4 {ip} > /dev/null")    # 返回4个包结果
         if a == 0:
             result = "ok"
-        elif a == 256:
+        if a == 256:
             result = "fail"
-        buffer += f"- ip: {ip} \n"
-        buffer += f"  status: {result} \n"
-        buffer += f"\n"
+        buffer += rf"- ip: {ip} \n"
+        buffer += rf"  status: {result} \n"
+        buffer += rf"\n"
     print(buffer)
+
+
+
+# Gemfile.lock
+# Gemfile
